@@ -8,10 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DrawCards {
-    public static void draw(Game game, Integer numOfCards){
-        Player player = game.getPlayers().get((game.getCurrentPlayer() + game.getDirection() + game.getPlayers().size()) % game.getPlayers().size()); // duplicate code
+    public static void draw(Game game, Player player, Integer numOfCards){
         List<Card> pile = game.getPile();
-
         for (int i = 0; i < numOfCards; i++){
             if (pile.isEmpty()){
                 shuffleDiscard(game);

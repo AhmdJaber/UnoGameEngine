@@ -39,7 +39,7 @@ public class BasicGame extends Game {
     }
 
     @Override
-    public void setNumOfInItPlayerCard() {
+    public void setNumOfInItPlayerCards() {
         this.playerInitialCards = new SevenInitialCards();
     }
 
