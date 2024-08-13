@@ -1,12 +1,11 @@
 package card;
 
-import card.actions.Action;
+import card.action.Action;
 import game.Game;
-import player.Player;
 
 public abstract class Card implements Action {
     private final Type type;
-    private Color color;
+    private Color color; // How to make it final?
     private final Integer points;
 
     public Card(Type type, Color color, Integer points) {

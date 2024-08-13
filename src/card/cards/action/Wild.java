@@ -3,7 +3,7 @@ package card.cards.action;
 import card.Card;
 import card.Color;
 import card.Type;
-import card.actions.ColorAction;
+import card.action.ChangeColor;
 import game.Game;
 
 public class Wild extends Card {
@@ -13,6 +13,6 @@ public class Wild extends Card {
 
     @Override
     public void action(Game game) {
-        setColor(ColorAction.change(game));
+        setColor(ChangeColor.change(game));
     }
 }

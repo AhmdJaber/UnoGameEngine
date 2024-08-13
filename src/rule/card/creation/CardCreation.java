@@ -1,4 +1,4 @@
-package rule.card;
+package rule.card.creation;
 
 import card.Card;
 import card.Color;

@@ -3,7 +3,7 @@ package card.cards.action;
 import card.Card;
 import card.Color;
 import card.Type;
-import card.actions.ReverseAction;
+import card.action.ReverseDirection;
 import game.Game;
 
 public class Reverse extends Card {
@@ -13,6 +13,6 @@ public class Reverse extends Card {
 
     @Override
     public void action(Game game) {
-        ReverseAction.reverse(game);
+        ReverseDirection.reverse(game);
     }
 }

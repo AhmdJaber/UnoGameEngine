@@ -3,7 +3,7 @@ package card.cards.action;
 import card.Card;
 import card.Color;
 import card.Type;
-import card.actions.PassAction;
+import card.action.PassPlayers;
 import game.Game;
 
 public class Pass extends Card {
@@ -13,6 +13,6 @@ public class Pass extends Card {
 
     @Override
     public void action(Game game) {
-        PassAction.pass(game);
+        PassPlayers.pass(game);
     }
 }

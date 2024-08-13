@@ -5,7 +5,7 @@ import card.Color;
 import card.Type;
 import card.cards.action.WildDrawFour;
 import player.Player;
-import rule.card.CardCreation;
+import rule.card.creation.CardCreation;
 import rule.card.distribute.CardDistribution;
 import rule.card.initial.PlayerInitialCards;
 import rule.color.ColorInitialization;
@@ -80,10 +80,11 @@ public abstract class Game {
         while (true){
             currentPlayer = (currentPlayer + players.size()) % players.size();
             Player player = players.get(currentPlayer);
+            player.getCards().add(new WildDrawFour(Type.WILD_DRAW_FOUR, Color.NONE, 50)); // remove it
             System.out.println("Discard: " + discard.get(discard.size() - 1));
             System.out.println("{ " + player.getName() + " }");
             while (!checkCardsMatch(player, discard.get(discard.size() - 1))){
-                System.out.println("There is no card of your cards that matches with the current Discard card!");
+                System.out.println("You have no card that matches with the current Discard card!");
                 System.out.println("Drawing a card from the Pile...");
                 player.getCards().add(pile.remove(pile.size() - 1));
             }
@@ -126,11 +127,12 @@ public abstract class Game {
         setPile(cards);
         setDiscard(new ArrayList<>());
         Card card = pile.remove(pile.size() - 1);
-        while(card.getType() == Type.WILD || card.getType() == Type.WILD_DRAW_FOUR){
-            discard.add(card);
-            card = pile.remove(pile.size() - 1);
-        }
         discard.add(card);
+        while(card.getType() == Type.WILD || card.getType() == Type.WILD_DRAW_FOUR){
+            card = pile.remove(pile.size() - 1);
+            discard.add(card);
+        }
+        this.getCards().clear();
     }
 
     public final boolean checkCardsMatch(Player player, Card card){
@@ -188,8 +190,16 @@ public abstract class Game {
         this.direction = direction;
     }
 
+    public void setCards(List<Card> cards) {
+        this.cards = cards;
+    }
+
     public Color getCurrentColor() {
         return currentColor;
+    }
+
+    public InitializeShuffle getInitializeShuffle() {
+        return initializeShuffle;
     }
 
     public List<Player> getPlayers(){
