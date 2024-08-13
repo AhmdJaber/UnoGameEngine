@@ -3,6 +3,7 @@ package game;
 import card.Card;
 import card.Color;
 import card.Type;
+import card.action.DrawCards;
 import card.cards.action.WildDrawFour;
 import player.Player;
 import rule.card.creation.CardCreation;
@@ -32,7 +33,7 @@ public abstract class Game {
     protected List<Card> pile;
     protected List<Card> discard;
     protected Integer direction;
-    protected Integer numOfInitPlayerCard;
+    protected Integer numOfInitPlayerCards;
     protected Match match;
     protected Win win;
     protected InitializeShuffle initializeShuffle;
@@ -51,7 +52,7 @@ public abstract class Game {
         setColors();
         setCardCreation();
         setShuffle();
-        setNumOfInItPlayerCard();
+        setNumOfInItPlayerCards();
         setInitDirection();
         setCalculatePoints();
         setWin();
@@ -64,11 +65,12 @@ public abstract class Game {
         prepareGame();
         players = playerCreation.create();
         dealer = pickDealer.pick();
+        currentPlayer = dealer;
         colors = colorInitialization.initialize();
         cards = cardCreation.create(colors);
         initializeShuffle.shuffle(cards);
-        numOfInitPlayerCard = playerInitialCards.initialize();
-        cardDistribution.distribute(cards, players, numOfInitPlayerCard);
+        numOfInitPlayerCards = playerInitialCards.initialize();
+        cardDistribution.distribute(cards, players, numOfInitPlayerCards);
         direction = initialDirection.initialize();
         setRemainingCards(cards);
         gamePlay();
@@ -80,21 +82,42 @@ public abstract class Game {
         while (true){
             currentPlayer = (currentPlayer + players.size()) % players.size();
             Player player = players.get(currentPlayer);
-            player.getCards().add(new WildDrawFour(Type.WILD_DRAW_FOUR, Color.NONE, 50)); // remove it
+//            player.getCards().add(new WildDrawFour(Type.WILD_DRAW_FOUR, Color.NONE, 50)); // remove it
             System.out.println("Discard: " + discard.get(discard.size() - 1));
             System.out.println("{ " + player.getName() + " }");
-            while (!checkCardsMatch(player, discard.get(discard.size() - 1))){
-                System.out.println("You have no card that matches with the current Discard card!");
-                System.out.println("Drawing a card from the Pile...");
-                player.getCards().add(pile.remove(pile.size() - 1));
-            }
-            System.out.println("Pick one of the following cards: (Enter the index of it)");
-            System.out.println(player.getCards());
-            int cardIdx = sc.nextInt();
+
+            // Picking card...
+            int cardIdx;
+            boolean useCard = true;
+            boolean canDraw = true;
             while (true){
-                while(cardIdx >= player.getCards().size()){
-                    System.out.println("Enter a number from " + 0 + " to " + (player.getCards().size() - 1));
-                    cardIdx = sc.nextInt();
+                System.out.println("-----------------------------------------------------");
+                System.out.println("Pick one card using it's index: ");
+                System.out.println(player.getCards());
+                boolean isMatch = checkCardsMatch(player, discard.get(discard.size() - 1));
+                if (!isMatch && canDraw){
+                    System.out.println("Draw a card from the Pile [Enter -1]");
+                }
+
+                cardIdx = sc.nextInt();
+                if (cardIdx == -1 && canDraw && !isMatch){
+                    DrawCards.draw(this, player, 1);
+                    canDraw = false;
+                    if (checkCardsMatch(player, discard.get(discard.size() - 1))){
+                        useCard = checkUseCard();
+                    }
+                    else {
+                        useCard = false;
+                        break;
+                    }
+                    if (useCard) {
+                        continue;
+                    }
+                    break;
+                }
+                if (cardIdx >= player.getCards().size() || cardIdx < 0){
+                    System.out.println("Enter an index from " + 0 + " to " + (player.getCards().size() - 1));
+                    continue;
                 }
                 Card card = player.getCards().get(cardIdx);
                 if (match.match(card, discard.get(discard.size() - 1)) || card.getType() == Type.WILD || card.getType() == Type.WILD_DRAW_FOUR){
@@ -102,18 +125,18 @@ public abstract class Game {
                 }
                 System.out.println("The card " + card + " doesn't matches with the Discard card!");
                 System.out.println("Enter a card that matches with: " + discard.get(discard.size() - 1));
-                cardIdx = sc.nextInt();
             }
 
-
-            Card card = player.getCards().remove(cardIdx);
-            getDiscard().add(card);
-            card.use(this);
+            if (useCard){
+                Card card = player.getCards().remove(cardIdx);
+                discard.add(card);
+                card.use(this);
+            }
             if (player.getCards().size() == 1){
                 System.out.println(player.getName() + ": UNO!");
             }
-
             if (player.getCards().isEmpty()){
+                // pick the winner based on the calculated points
                 winner = player;
                 break;
             }
@@ -124,7 +147,8 @@ public abstract class Game {
     }
 
     public final void setRemainingCards(List<Card> cards){
-        setPile(cards);
+        pile = new ArrayList<>();
+        pile.addAll(cards);
         setDiscard(new ArrayList<>());
         Card card = pile.remove(pile.size() - 1);
         discard.add(card);
@@ -132,17 +156,35 @@ public abstract class Game {
             card = pile.remove(pile.size() - 1);
             discard.add(card);
         }
-        this.getCards().clear();
+        card.use(this);
+        cards.clear();
     }
 
     public final boolean checkCardsMatch(Player player, Card card){
         for (Card currentCard: player.getCards()){
-            if (match.match(currentCard, card) || card.getType() == Type.WILD || card.getType() == Type.WILD_DRAW_FOUR){
+            if (match.match(currentCard, card) || currentCard.getType() == Type.WILD || currentCard.getType() == Type.WILD_DRAW_FOUR){
                 return true;
             }
         }
 
         return false;
+    }
+
+    public final boolean checkUseCard(){
+        System.out.println("Do you want to use the drawn card? [Y/N]");
+        Scanner sc = new Scanner(System.in);
+        while (true){
+            String input = sc.next();
+            if (input.equalsIgnoreCase("yes") || input.equalsIgnoreCase("y")){
+                return true;
+            }
+            else if (input.equalsIgnoreCase("no") || input.equalsIgnoreCase("n")){
+                return false;
+            }
+            else {
+                System.out.println("Enter Y/Yes or N/NO");
+            }
+        }
     }
 
     public abstract void setPlayers();
@@ -155,7 +197,7 @@ public abstract class Game {
 
     public abstract void setShuffle();
 
-    public abstract void setNumOfInItPlayerCard();
+    public abstract void setNumOfInItPlayerCards();
 
     public abstract void setMatch();
 
@@ -231,7 +273,7 @@ public abstract class Game {
     }
 
     public Integer getNumOfInItPlayerCard() {
-        return numOfInitPlayerCard;
+        return numOfInitPlayerCards;
     }
 
     public Match getMatch() {

@@ -4,6 +4,7 @@ import game.Game;
 
 public class PassPlayers {
     public static void pass(Game game){
-        game.setCurrentPlayer(game.getCurrentPlayer() + game.getDirection()); // duplicate code in draw!
+        int numOfPlayers = game.getPlayers().size();
+        game.setCurrentPlayer((game.getCurrentPlayer() + game.getDirection() + numOfPlayers) % numOfPlayers); // duplicate code in draw!
     }
 }
