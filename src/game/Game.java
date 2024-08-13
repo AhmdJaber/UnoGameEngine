@@ -81,10 +81,10 @@ public abstract class Game {
             currentPlayer = (currentPlayer + players.size()) % players.size();
             Player player = players.get(currentPlayer);
             System.out.println("Discard: " + discard.get(discard.size() - 1));
-            player.getCards().add(new WildDrawFour(Type.WILD_DRAW_FOUR, Color.NONE, 500));
+            System.out.println("{ " + player.getName() + " }");
             while (!checkCardsMatch(player, discard.get(discard.size() - 1))){
                 System.out.println("There is no card of your cards that matches with the current Discard card!");
-                System.out.println("Drawing a card from the Pile....");
+                System.out.println("Drawing a card from the Pile...");
                 player.getCards().add(pile.remove(pile.size() - 1));
             }
             System.out.println("Pick one of the following cards: (Enter the index of it)");
