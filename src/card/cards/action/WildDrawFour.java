@@ -3,8 +3,8 @@ package card.cards.action;
 import card.Card;
 import card.Color;
 import card.Type;
-import card.actions.ColorAction;
-import card.actions.DrawAction;
+import card.action.ChangeColor;
+import card.action.DrawCards;
 import game.Game;
 
 public class WildDrawFour extends Card {
@@ -14,7 +14,7 @@ public class WildDrawFour extends Card {
 
     @Override
     public void action(Game game) {
-        setColor(ColorAction.change(game));
-        DrawAction.draw(game, 4);
+        setColor(ChangeColor.change(game));
+        DrawCards.draw(game, 4);
     }
 }

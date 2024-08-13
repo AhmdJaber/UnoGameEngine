@@ -1,6 +1,6 @@
 package game;
 
-import rule.card.NormalCardCreation;
+import rule.card.creation.NormalCardCreation;
 import rule.card.distribute.NormalDistribution;
 import rule.card.initial.SevenInitialCards;
 import rule.color.NormalColorsInitialization;

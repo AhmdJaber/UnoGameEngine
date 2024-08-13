@@ -3,7 +3,7 @@ package card.cards.action;
 import card.Card;
 import card.Color;
 import card.Type;
-import card.actions.DrawAction;
+import card.action.DrawCards;
 import game.Game;
 
 public class DrawTwo extends Card {
@@ -13,6 +13,6 @@ public class DrawTwo extends Card {
 
     @Override
     public void action(Game game) {
-        DrawAction.draw(game, 2);
+        DrawCards.draw(game, 2);
     }
 }

@@ -1,4 +1,4 @@
-package rule.card;
+package rule.card.creation;
 
 import card.Card;
 import card.Color;
@@ -9,7 +9,7 @@ import card.cards.number.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NormalCardCreation implements CardCreation{
+public class NormalCardCreation implements CardCreation {
     @Override
     public List<Card> create(List<Color> colors) {
         List<Card> cards = new ArrayList<>();
