@@ -46,20 +46,6 @@ public abstract class Game {
     private CalculatePoints calculatePoints;
     private CardDistribution cardDistribution;
 
-    public final void prepareGame(){
-        initPlayers();
-        initDealer();
-        initColors();
-        initCardCreation();
-        initShuffle();
-        initNumOfInItPlayerCards();
-        initInitDirection();
-        initCalculatePoints();
-        initWin();
-        initMatch();
-        initCardDistribution();
-    }
-
     public final void start(){
         prepareGame();
         players = playerCreation.create();
@@ -75,10 +61,24 @@ public abstract class Game {
         gamePlay();
     }
 
+    private void prepareGame(){
+        initPlayers();
+        initDealer();
+        initColors();
+        initCardCreation();
+        initShuffle();
+        initNumOfInItPlayerCards();
+        initInitDirection();
+        initCalculatePoints();
+        initWin();
+        initMatch();
+        initCardDistribution();
+    }
+
     public final void gamePlay(){
         Scanner sc = new Scanner(System.in);
         currentPlayer = dealer + direction;
-        while (true){
+        while (winner == null){
             currentPlayer = (currentPlayer + players.size()) % players.size();
             Player player = players.get(currentPlayer);
             System.out.println("Discard: " + discard.get(discard.size() - 1));
@@ -213,7 +213,6 @@ public abstract class Game {
 
 
     // getters / setters
-
     public List<Player> getPlayers() {
         return players;
     }

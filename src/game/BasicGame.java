@@ -13,6 +13,16 @@ import rule.shuffle.RandomShuffle;
 import rule.win.PositiveWin;
 
 public class BasicGame extends Game {
+    private static BasicGame basicGame = new BasicGame();
+
+    private BasicGame(){
+
+    }
+
+    public static BasicGame getInstance(){
+        return basicGame;
+    }
+
     @Override
     public void initPlayers() {
         this.setPlayerCreation(new NormalPlayerCreation());
