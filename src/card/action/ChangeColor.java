@@ -1,6 +1,6 @@
 package card.action;
 
-import card.Color;
+import card.enums.Color;
 import game.Game;
 import utility.Colors;
 

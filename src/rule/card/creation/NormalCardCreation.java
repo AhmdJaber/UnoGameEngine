@@ -1,8 +1,8 @@
 package rule.card.creation;
 
 import card.Card;
-import card.Color;
-import card.Type;
+import card.enums.Color;
+import card.enums.Type;
 import card.cards.action.*;
 import card.cards.number.*;
 

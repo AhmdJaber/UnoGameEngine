@@ -1,8 +1,9 @@
 package game;
 
+import card.ActionCard;
 import card.Card;
-import card.Color;
-import card.Type;
+import card.enums.Color;
+import card.enums.Type;
 import card.action.DrawCards;
 import player.Player;
 import rule.card.creation.CardCreation;
@@ -126,7 +127,9 @@ public abstract class Game {
             if (useCard){
                 Card card = player.getCards().remove(cardIdx);
                 discard.add(card);
-                card.use(this);
+                if (card instanceof ActionCard){
+                    ((ActionCard) card).use(this);
+                }
             }
             if (player.getCards().size() == 1){
                 System.out.println(player.getName() + ": UNO!");
@@ -152,7 +155,9 @@ public abstract class Game {
             card = pile.remove(pile.size() - 1);
             discard.add(card);
         }
-        card.use(this);
+        if (card instanceof ActionCard){
+            ((ActionCard) card).use(this);
+        }
         cards.clear();
     }
 

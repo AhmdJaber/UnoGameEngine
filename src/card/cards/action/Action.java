@@ -1,4 +1,4 @@
-package card.action;
+package card.cards.action;
 
 import game.Game;
 

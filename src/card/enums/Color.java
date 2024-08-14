@@ -1,4 +1,4 @@
-package card;
+package card.enums;
 
 public enum Color {
     RED,

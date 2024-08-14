@@ -1,9 +1,9 @@
 package card;
 
-import card.action.Action;
-import game.Game;
+import card.enums.Color;
+import card.enums.Type;
 
-public abstract class Card implements Action {
+public abstract class Card {
     private final Type type;
     private Color color; // How to make it final?
     private final Integer points;
@@ -12,13 +12,6 @@ public abstract class Card implements Action {
         this.type = type;
         this.color = color;
         this.points = points;
-    }
-
-    @Override
-    public abstract void action(Game game);
-
-    public void use(Game game){
-        this.action(game);
     }
 
     public Type getType() {
