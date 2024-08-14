@@ -14,57 +14,57 @@ import rule.win.PositiveWin;
 
 public class BasicGame extends Game {
     @Override
-    public void setPlayers() {
-        this.playerCreation = new NormalPlayerCreation();
+    public void initPlayers() {
+        this.setPlayerCreation(new NormalPlayerCreation());
     }
 
     @Override
-    public void setDealer() {
-        this.pickDealer = new FirstPlayerDealer();
+    public void initDealer() {
+        this.setPickDealer(new FirstPlayerDealer());
     }
 
     @Override
-    public void setColors() {
-        this.colorInitialization = new NormalColorsInitialization();
+    public void initColors() {
+        this.setColorInitialization(new NormalColorsInitialization());
     }
 
     @Override
-    public void setCardCreation() {
-        this.cardCreation = new NormalCardCreation();
+    public void initCardCreation() {
+        this.setCardCreation(new NormalCardCreation());
     }
 
     @Override
-    public void setShuffle() {
-        this.initializeShuffle = new RandomShuffle();
+    public void initShuffle() {
+        this.setInitializeShuffle(new RandomShuffle());
     }
 
     @Override
-    public void setNumOfInItPlayerCards() {
-        this.playerInitialCards = new SevenInitialCards();
+    public void initNumOfInItPlayerCards() {
+        this.setPlayerInitialCards(new SevenInitialCards());
     }
 
     @Override
-    public void setMatch(){
-        this.match = new MatchTypeOrColor();
+    public void initMatch(){
+        this.setMatch(new MatchTypeOrColor());
     }
 
     @Override
-    public void setCalculatePoints() {
-        this.calculatePoints = new PositiveCalculation();
+    public void initCalculatePoints() {
+        this.setCalculatePoints(new PositiveCalculation());
     }
 
     @Override
-    public void setWin() {
-        this.win = new PositiveWin();
+    public void initWin() {
+        this.setWin(new PositiveWin());
     }
 
     @Override
-    public void setInitDirection() {
-        this.initialDirection = new LeftInitialDirection();
+    public void initInitDirection() {
+        this.setInitialDirection(new LeftInitialDirection());
     }
 
     @Override
-    public void setCardDistribution() {
-        this.cardDistribution = new NormalDistribution();
+    public void initCardDistribution() {
+        this.setCardDistribution(new NormalDistribution());
     }
 }
