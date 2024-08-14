@@ -1,12 +1,12 @@
 package card.cards.action;
 
-import card.Card;
-import card.Color;
-import card.Type;
+import card.ActionCard;
 import card.action.ChangeColor;
+import card.enums.Color;
+import card.enums.Type;
 import game.Game;
 
-public class Wild extends Card {
+public class Wild extends ActionCard {
     public Wild(Type type, Color color, Integer points) {
         super(type, color, points);
     }

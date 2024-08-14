@@ -1,6 +1,6 @@
 package utility;
 
-import card.Color;
+import card.enums.Color;
 
 import java.util.List;
 import java.util.Scanner;

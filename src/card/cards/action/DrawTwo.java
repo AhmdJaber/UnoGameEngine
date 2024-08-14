@@ -1,13 +1,13 @@
 package card.cards.action;
 
-import card.Card;
-import card.Color;
-import card.Type;
+import card.ActionCard;
 import card.action.DrawCards;
+import card.enums.Color;
+import card.enums.Type;
 import game.Game;
 import player.Player;
 
-public class DrawTwo extends Card {
+public class DrawTwo extends ActionCard {
     public DrawTwo(Type type, Color color, Integer points) {
         super(type, color, points);
     }

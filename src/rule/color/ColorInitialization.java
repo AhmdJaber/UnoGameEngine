@@ -1,6 +1,6 @@
 package rule.color;
 
-import card.Color;
+import card.enums.Color;
 
 import java.util.List;
 

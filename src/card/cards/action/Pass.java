@@ -1,12 +1,12 @@
 package card.cards.action;
 
-import card.Card;
-import card.Color;
-import card.Type;
+import card.ActionCard;
 import card.action.PassPlayers;
+import card.enums.Color;
+import card.enums.Type;
 import game.Game;
 
-public class Pass extends Card {
+public class Pass extends ActionCard {
     public Pass(Type type, Color color, Integer points) {
         super(type, color, points);
     }

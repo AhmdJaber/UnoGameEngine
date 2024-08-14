@@ -1,7 +1,7 @@
 package rule.card.creation;
 
 import card.Card;
-import card.Color;
+import card.enums.Color;
 
 import java.util.List;
 
