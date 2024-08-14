@@ -5,5 +5,5 @@ import player.Player;
 import java.util.List;
 
 public interface PlayerCreation {
-    public List<Player> create();
+    public List<Player> create(int numOfPlayers);
 }

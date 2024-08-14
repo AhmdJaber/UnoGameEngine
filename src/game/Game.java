@@ -48,7 +48,7 @@ public abstract class Game {
 
     public final void start(){
         prepareGame();
-        players = playerCreation.create();
+        players = playerCreation.create(4);
         dealer = pickDealer.pick();
         currentPlayer = dealer;
         colors = colorInitialization.initialize();
