@@ -8,6 +8,9 @@ import java.util.List;
 public class RandomShuffle implements InitializeShuffle {
     @Override
     public void shuffle(List<Card> cards) {
+        if (cards == null){
+            throw new IllegalArgumentException("cards is null");
+        }
         int n = cards.size();
         for (int i = 0; i < n; i++) {
             int a = (int) (Math.random() * (n));

@@ -4,7 +4,6 @@ import card.Card;
 import card.Color;
 import card.Type;
 import card.action.DrawCards;
-import card.cards.action.WildDrawFour;
 import player.Player;
 import rule.card.creation.CardCreation;
 import rule.card.distribute.CardDistribution;
@@ -23,42 +22,41 @@ import java.util.List;
 import java.util.Scanner;
 
 public abstract class Game {
-    protected List<Player> players;
-    protected Integer dealer;
-    protected Integer currentPlayer;
-    protected Player winner;
-    protected List<Card> cards;
-    protected List<Color> colors;
-    protected Color currentColor;
-    protected List<Card> pile;
-    protected List<Card> discard;
-    protected Integer direction;
-    protected Integer numOfInitPlayerCards;
-    protected Match match;
-    protected Win win;
-    protected InitializeShuffle initializeShuffle;
-    protected CardCreation cardCreation;
-    protected ColorInitialization colorInitialization;
-    protected PlayerCreation playerCreation;
-    protected PickDealer pickDealer;
-    protected PlayerInitialCards playerInitialCards;
-    protected InitialDirection initialDirection;
-    protected CalculatePoints calculatePoints;
-    protected CardDistribution cardDistribution;
+    private List<Player> players;
+    private Integer dealer;
+    private Integer currentPlayer;
+    private Player winner;
+    private List<Card> cards;
+    private List<Color> colors;
+    private Color currentColor;
+    private List<Card> pile;
+    private List<Card> discard;
+    private Integer direction;
+    private Integer numOfInitPlayerCards;
+    private Match match;
+    private Win win;
+    private InitializeShuffle initializeShuffle;
+    private CardCreation cardCreation;
+    private ColorInitialization colorInitialization;
+    private PlayerCreation playerCreation;
+    private PickDealer pickDealer;
+    private PlayerInitialCards playerInitialCards;
+    private InitialDirection initialDirection;
+    private CalculatePoints calculatePoints;
+    private CardDistribution cardDistribution;
 
     public final void prepareGame(){
-        setPlayers();
-        setDealer();
-        setColors();
-        setCardCreation();
-        setShuffle();
-        setNumOfInItPlayerCards();
-        setInitDirection();
-        setCalculatePoints();
-        setWin();
-        setMatch();
-        setCardDistribution();
-        // reorder them
+        initPlayers();
+        initDealer();
+        initColors();
+        initCardCreation();
+        initShuffle();
+        initNumOfInItPlayerCards();
+        initInitDirection();
+        initCalculatePoints();
+        initWin();
+        initMatch();
+        initCardDistribution();
     }
 
     public final void start(){
@@ -82,11 +80,9 @@ public abstract class Game {
         while (true){
             currentPlayer = (currentPlayer + players.size()) % players.size();
             Player player = players.get(currentPlayer);
-//            player.getCards().add(new WildDrawFour(Type.WILD_DRAW_FOUR, Color.NONE, 50)); // remove it
             System.out.println("Discard: " + discard.get(discard.size() - 1));
             System.out.println("{ " + player.getName() + " }");
 
-            // Picking card...
             int cardIdx;
             boolean useCard = true;
             boolean canDraw = true;
@@ -187,104 +183,205 @@ public abstract class Game {
         }
     }
 
-    public abstract void setPlayers();
+    public abstract void initPlayers();
 
-    public abstract void setDealer();
+    public abstract void initDealer();
 
-    public abstract void setColors();
+    public abstract void initColors();
 
-    public abstract void setCardCreation();
+    public abstract void initCardCreation();
 
-    public abstract void setShuffle();
+    public abstract void initShuffle();
 
-    public abstract void setNumOfInItPlayerCards();
+    public abstract void initNumOfInItPlayerCards();
 
-    public abstract void setMatch();
+    public abstract void initMatch();
 
-    public abstract void setCalculatePoints();
+    public abstract void initCalculatePoints();
 
-    public abstract void setWin();
+    public abstract void initWin();
 
-    public abstract void setInitDirection();
+    public abstract void initInitDirection();
 
-    public abstract void setCardDistribution();
+    public abstract void initCardDistribution();
 
 
 
-    // trash?
-    public void setCurrentPlayer(Integer currentPlayer) {
-        this.currentPlayer = currentPlayer;
-    }
+    // getters / setters
 
-    public void setCurrentColor(Color currentColor) {
-        this.currentColor = currentColor;
-    }
-
-    public void setPile(List<Card> pile) {
-        this.pile = pile;
-    }
-
-    public void setDiscard(List<Card> discard) {
-        this.discard = discard;
-    }
-
-    public void setDirection(Integer direction) {
-        this.direction = direction;
-    }
-
-    public void setCards(List<Card> cards) {
-        this.cards = cards;
-    }
-
-    public Color getCurrentColor() {
-        return currentColor;
-    }
-
-    public InitializeShuffle getInitializeShuffle() {
-        return initializeShuffle;
-    }
-
-    public List<Player> getPlayers(){
+    public List<Player> getPlayers() {
         return players;
+    }
+
+    public void setPlayers(List<Player> players) {
+        this.players = players;
+    }
+
+    public Integer getDealer() {
+        return dealer;
+    }
+
+    public void setDealer(Integer dealer) {
+        this.dealer = dealer;
     }
 
     public Integer getCurrentPlayer() {
         return currentPlayer;
     }
 
+    public void setCurrentPlayer(Integer currentPlayer) {
+        this.currentPlayer = currentPlayer;
+    }
+
+    public Player getWinner() {
+        return winner;
+    }
+
+    public void setWinner(Player winner) {
+        this.winner = winner;
+    }
+
     public List<Card> getCards() {
         return cards;
+    }
+
+    public void setCards(List<Card> cards) {
+        this.cards = cards;
     }
 
     public List<Color> getColors() {
         return colors;
     }
 
+    public void setColors(List<Color> colors) {
+        this.colors = colors;
+    }
+
+    public Color getCurrentColor() {
+        return currentColor;
+    }
+
+    public void setCurrentColor(Color currentColor) {
+        this.currentColor = currentColor;
+    }
+
     public List<Card> getPile() {
         return pile;
+    }
+
+    public void setPile(List<Card> pile) {
+        this.pile = pile;
     }
 
     public List<Card> getDiscard() {
         return discard;
     }
 
+    public void setDiscard(List<Card> discard) {
+        this.discard = discard;
+    }
+
     public Integer getDirection() {
         return direction;
     }
 
-    public Integer getNumOfInItPlayerCard() {
+    public void setDirection(Integer direction) {
+        this.direction = direction;
+    }
+
+    public Integer getNumOfInitPlayerCards() {
         return numOfInitPlayerCards;
+    }
+
+    public void setNumOfInitPlayerCards(Integer numOfInitPlayerCards) {
+        this.numOfInitPlayerCards = numOfInitPlayerCards;
     }
 
     public Match getMatch() {
         return match;
     }
 
-    public CalculatePoints getCalculatePoints() {
-        return calculatePoints;
+    public void setMatch(Match match) {
+        this.match = match;
     }
 
     public Win getWin() {
         return win;
+    }
+
+    public void setWin(Win win) {
+        this.win = win;
+    }
+
+    public InitializeShuffle getInitializeShuffle() {
+        return initializeShuffle;
+    }
+
+    public void setInitializeShuffle(InitializeShuffle initializeShuffle) {
+        this.initializeShuffle = initializeShuffle;
+    }
+
+    public CardCreation getCardCreation() {
+        return cardCreation;
+    }
+
+    public void setCardCreation(CardCreation cardCreation) {
+        this.cardCreation = cardCreation;
+    }
+
+    public ColorInitialization getColorInitialization() {
+        return colorInitialization;
+    }
+
+    public void setColorInitialization(ColorInitialization colorInitialization) {
+        this.colorInitialization = colorInitialization;
+    }
+
+    public PlayerCreation getPlayerCreation() {
+        return playerCreation;
+    }
+
+    public void setPlayerCreation(PlayerCreation playerCreation) {
+        this.playerCreation = playerCreation;
+    }
+
+    public PickDealer getPickDealer() {
+        return pickDealer;
+    }
+
+    public void setPickDealer(PickDealer pickDealer) {
+        this.pickDealer = pickDealer;
+    }
+
+    public PlayerInitialCards getPlayerInitialCards() {
+        return playerInitialCards;
+    }
+
+    public void setPlayerInitialCards(PlayerInitialCards playerInitialCards) {
+        this.playerInitialCards = playerInitialCards;
+    }
+
+    public InitialDirection getInitialDirection() {
+        return initialDirection;
+    }
+
+    public void setInitialDirection(InitialDirection initialDirection) {
+        this.initialDirection = initialDirection;
+    }
+
+    public CalculatePoints getCalculatePoints() {
+        return calculatePoints;
+    }
+
+    public void setCalculatePoints(CalculatePoints calculatePoints) {
+        this.calculatePoints = calculatePoints;
+    }
+
+    public CardDistribution getCardDistribution() {
+        return cardDistribution;
+    }
+
+    public void setCardDistribution(CardDistribution cardDistribution) {
+        this.cardDistribution = cardDistribution;
     }
 }

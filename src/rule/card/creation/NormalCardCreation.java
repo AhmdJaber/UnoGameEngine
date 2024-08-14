@@ -12,6 +12,9 @@ import java.util.List;
 public class NormalCardCreation implements CardCreation {
     @Override
     public List<Card> create(List<Color> colors) {
+        if (colors == null){
+            throw new IllegalArgumentException("List<Color> is null");
+        }
         List<Card> cards = new ArrayList<>();
         List<Card> validCards = new ArrayList<>();
         for (Color color : colors){
