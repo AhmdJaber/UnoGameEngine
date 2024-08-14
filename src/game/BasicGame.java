@@ -16,7 +16,6 @@ public class BasicGame extends Game {
     private static BasicGame basicGame = new BasicGame();
 
     private BasicGame(){
-
     }
 
     public static BasicGame getInstance(){
@@ -25,7 +24,7 @@ public class BasicGame extends Game {
 
     @Override
     public void initPlayers() {
-        this.setPlayerCreation(new NormalPlayerCreation());
+        this.setPlayerCreation(new NormalPlayerCreation(4));
     }
 
     @Override
@@ -65,7 +64,7 @@ public class BasicGame extends Game {
 
     @Override
     public void initWin() {
-        this.setWin(new PositiveWin());
+        this.setWin(new PositiveWin(500));
     }
 
     @Override

@@ -1,10 +1,11 @@
 package player;
 
 import card.Card;
+import game.Game;
 
 import java.util.List;
 
-public class Player {
+public class Player implements Observer{
     private String name;
     private Integer age;
     private Integer score;
@@ -60,5 +61,10 @@ public class Player {
                 ", score=" + score +
                 ", cards=" + cards +
                 '}';
+    }
+
+    @Override
+    public void update(Game game, List<Card> cards) {
+        game.getCalculatePoints().calculate(this, cards);
     }
 }

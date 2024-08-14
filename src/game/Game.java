@@ -2,9 +2,10 @@ package game;
 
 import card.ActionCard;
 import card.Card;
+import card.action.DrawCards;
 import card.enums.Color;
 import card.enums.Type;
-import card.action.DrawCards;
+import player.Observer;
 import player.Player;
 import rule.card.creation.CardCreation;
 import rule.card.distribute.CardDistribution;
@@ -22,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public abstract class Game {
+public abstract class Game implements Notifier{
     private List<Player> players;
     private Integer dealer;
     private Integer currentPlayer;
@@ -45,20 +46,26 @@ public abstract class Game {
     private InitialDirection initialDirection;
     private CalculatePoints calculatePoints;
     private CardDistribution cardDistribution;
+    private List<Observer> observers;
 
     public final void start(){
-        prepareGame();
-        players = playerCreation.create(4);
-        dealer = pickDealer.pick();
-        currentPlayer = dealer;
-        colors = colorInitialization.initialize();
-        cards = cardCreation.create(colors);
-        initializeShuffle.shuffle(cards);
-        numOfInitPlayerCards = playerInitialCards.initialize();
-        cardDistribution.distribute(cards, players, numOfInitPlayerCards);
-        direction = initialDirection.initialize();
-        setRemainingCards(cards);
-        gamePlay();
+        while (winner == null) {
+            prepareGame();
+            players = playerCreation.create();
+            dealer = pickDealer.pick();
+            currentPlayer = dealer;
+            colors = colorInitialization.initialize();
+            cards = cardCreation.create(colors);
+            initializeShuffle.shuffle(cards);
+            numOfInitPlayerCards = playerInitialCards.initialize();
+            cardDistribution.distribute(cards, players, numOfInitPlayerCards);
+            direction = initialDirection.initialize();
+            setRemainingCards(cards);
+            setObservers();
+            gamePlay();
+            System.out.println("Round ends.");
+            System.out.println("===========================================================");
+        }
     }
 
     private void prepareGame(){
@@ -75,10 +82,10 @@ public abstract class Game {
         initCardDistribution();
     }
 
-    public final void gamePlay(){
+    private void gamePlay(){
         Scanner sc = new Scanner(System.in);
         currentPlayer = dealer + direction;
-        while (winner == null){
+        while (true){
             currentPlayer = (currentPlayer + players.size()) % players.size();
             Player player = players.get(currentPlayer);
             System.out.println("Discard: " + discard.get(discard.size() - 1));
@@ -131,12 +138,22 @@ public abstract class Game {
                     ((ActionCard) card).use(this);
                 }
             }
+
             if (player.getCards().size() == 1){
                 System.out.println(player.getName() + ": UNO!");
             }
+
             if (player.getCards().isEmpty()){
-                // pick the winner based on the calculated points
-                winner = player;
+                List<Card> playersCards = new ArrayList<>();
+                for(Player currentPlayer: players){
+                    playersCards.addAll(currentPlayer.getCards());
+                }
+                notifyObserver(player, playersCards);
+                notifyObserver(player.getCards());
+
+                if (getWin().win(player)){
+                    winner = player;
+                }
                 break;
             }
             currentPlayer += direction;
@@ -188,6 +205,29 @@ public abstract class Game {
         }
     }
 
+    @Override
+    public void register(Observer observer){
+        observers.add(observer);
+    }
+
+    @Override
+    public void unregister(Observer observer){
+        observers.remove(observer);
+    }
+
+    @Override
+    public void notifyObserver(List<Card> cards){
+        for (Observer observer: observers){
+            observer.update(this, cards);
+        }
+    }
+
+    @Override
+    public void notifyObserver(Observer observer, List<Card> cards){
+        observer.update(this, cards);
+    }
+
+    // abstract
     public abstract void initPlayers();
 
     public abstract void initDealer();
@@ -209,8 +249,6 @@ public abstract class Game {
     public abstract void initInitDirection();
 
     public abstract void initCardDistribution();
-
-
 
     // getters / setters
     public List<Player> getPlayers() {
@@ -387,5 +425,14 @@ public abstract class Game {
 
     public void setCardDistribution(CardDistribution cardDistribution) {
         this.cardDistribution = cardDistribution;
+    }
+
+    public List<Observer> getObservers() {
+        return observers;
+    }
+
+    public void setObservers() {
+        this.observers = new ArrayList<>();
+        observers.addAll(players);
     }
 }

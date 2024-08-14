@@ -2,6 +2,16 @@ package rule.win;
 
 import player.Player;
 
-public interface Win {
-    public boolean win(Player player, Integer points);
+public abstract class Win {
+    private final int points;
+
+    public Win(int points) {
+        this.points = points;
+    }
+
+    public abstract boolean win(Player player);
+
+    public int getPoints() {
+        return points;
+    }
 }

@@ -3,16 +3,18 @@ package rule.points;
 import card.Card;
 import player.Player;
 
+import java.util.List;
+
 public class PositiveCalculation implements CalculatePoints{
     @Override
-    public Integer calculate(Player player) {
+    public void calculate(Player player, List<Card> cards) {
         if (player == null){
             throw new IllegalArgumentException("player is null");
         }
-        Integer count = 0;
-        for (Card card : player.getCards()) {
+        Integer count = player.getScore();
+        for (Card card : cards) {
             count += card.getPoints();
         }
-        return count;
+       player.setScore(count);
     }
 }
