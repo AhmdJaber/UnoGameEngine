@@ -6,6 +6,10 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Colors {
+    private Colors(){
+        throw new AssertionError("Utility class should not be instantiated");
+    }
+
     public static void printColors(List<Color> colors){
         System.out.println("Pick one color to set");
         for (Color color : colors) {
@@ -32,6 +36,7 @@ public class Colors {
                 System.out.println("Please enter a valid color");
             }
         }
+        sc.close();
         return color;
     }
 }

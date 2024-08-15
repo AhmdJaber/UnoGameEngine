@@ -34,7 +34,7 @@ public class PositiveCalculation implements CalculatePoints{
             allPlayersCards.addAll(currentPlayer.getCards());
         }
 
-        Integer count = player.getScore();
+        int count = player.getScore();
         for (Card card : allPlayersCards) {
             count += card.getPoints();
         }

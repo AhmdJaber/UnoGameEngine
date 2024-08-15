@@ -153,9 +153,9 @@ public abstract class Game implements Notifier{
             }
             currentPlayer += direction;
         }
-
         System.out.println("The player: " + winner + " Wins the Round!");
         Player.printScores(this);
+        sc.close();
     }
 
     public final void setRemainingCards(List<Card> cards){
@@ -186,17 +186,18 @@ public abstract class Game implements Notifier{
 
     public final boolean checkUseCard(){
         System.out.println("Do you want to use the drawn card? [Y/N]");
-        Scanner sc = new Scanner(System.in);
-        while (true){
-            String input = sc.next();
-            if (input.equalsIgnoreCase("yes") || input.equalsIgnoreCase("y")){
-                return true;
-            }
-            else if (input.equalsIgnoreCase("no") || input.equalsIgnoreCase("n")){
-                return false;
-            }
-            else {
-                System.out.println("Enter Y/Yes or N/NO");
+        try (Scanner sc = new Scanner(System.in)){
+            while (true){
+                String input = sc.next();
+                if (input.equalsIgnoreCase("yes") || input.equalsIgnoreCase("y")){
+                    return true;
+                }
+                else if (input.equalsIgnoreCase("no") || input.equalsIgnoreCase("n")){
+                    return false;
+                }
+                else {
+                    System.out.println("Enter Y/Yes or N/NO");
+                }
             }
         }
     }

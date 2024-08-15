@@ -29,7 +29,7 @@ public class NegativeCalculation implements CalculatePoints{
             return;
         }
 
-        Integer count = player.getScore();
+        int count = player.getScore();
         List<Card> cards = player.getCards();
         for (Card card : cards) {
             count -= card.getPoints();

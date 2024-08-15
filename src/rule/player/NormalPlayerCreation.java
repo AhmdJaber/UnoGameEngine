@@ -14,14 +14,19 @@ public class NormalPlayerCreation extends NumberedPlayerCreation{
     @Override
     public List<Player> create() {
         List<Player> players = new ArrayList<>();
-        Scanner sc = new Scanner(System.in);
-        for (int i = 0; i < this.getNumOfPlayers(); i++){
-            System.out.println("Enter the player's name: ");
-            String name = sc.next();
-            System.out.println("Enter the player's age: ");
-            int age = sc.nextInt();
-            players.add(new Player(name, age, 0, new ArrayList<>()));
+        try (Scanner sc = new Scanner(System.in)){
+            for (int i = 0; i < this.getNumOfPlayers(); i++){
+                System.out.println("Enter the player's name: ");
+                String name = sc.next();
+                System.out.println("Enter the player's age: ");
+                int age = sc.nextInt();
+                while (age < 1){
+                    System.out.println("Enter a number greater than 0");
+                    age = sc.nextInt();
+                }
+                players.add(new Player(name, age, 0, new ArrayList<>()));
+            }
+            return players;
         }
-        return players;
     }
 }

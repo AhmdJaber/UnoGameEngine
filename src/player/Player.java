@@ -4,6 +4,7 @@ import card.Card;
 import game.Game;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Player implements Observer{
     private String name;
@@ -54,6 +55,18 @@ public class Player implements Observer{
         this.score = score;
     }
 
+    public static void printScores(Game game){
+        System.out.println("The score of the players after this round: ");
+        for (Player player: game.getPlayers()){
+            System.out.println("[ " + player.getName() + ": " + player.getScore() + " ]");
+        }
+    }
+
+    @Override
+    public void update(Game game) {
+        game.getCalculatePoints().calculate(this, game);
+    }
+
     @Override
     public String toString() {
         return name + "{" +
@@ -64,14 +77,21 @@ public class Player implements Observer{
     }
 
     @Override
-    public void update(Game game) {
-        game.getCalculatePoints().calculate(this, game);
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+
+        if (object == null || getClass() != object.getClass()){
+            return false;
+        }
+
+        Player player = (Player) object;
+        return Objects.equals(name, player.name) && Objects.equals(age, player.age) && Objects.equals(score, player.score) && Objects.equals(cards, player.cards);
     }
 
-    public static void printScores(Game game){
-        System.out.println("The score of the players after this round: ");
-        for (Player player: game.getPlayers()){
-            System.out.println("[ " + player.getName() + ": " + player.getScore() + " ]");
-        }
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, age, score, cards);
     }
 }
