@@ -61,7 +61,7 @@ public abstract class Game implements Notifier{
             cardDistribution.distribute(cards, players, numOfInitPlayerCards);
             direction = initialDirection.initialize();
             setRemainingCards(cards);
-            setObservers();
+            setObservers(players);
             gamePlay();
             System.out.println("Round ends.");
             System.out.println("===========================================================");
@@ -144,11 +144,6 @@ public abstract class Game implements Notifier{
             }
 
             if (player.getCards().isEmpty()){
-                List<Card> playersCards = new ArrayList<>();
-                for(Player currentPlayer: players){
-                    playersCards.addAll(currentPlayer.getCards());
-                }
-                notifyObserver(player, playersCards);
                 notifyObserver(player.getCards());
 
                 if (getWin().win(player)){
@@ -159,7 +154,8 @@ public abstract class Game implements Notifier{
             currentPlayer += direction;
         }
 
-        System.out.println("The player: " + winner + " Wins the Game!");
+        System.out.println("The player: " + winner + " Wins the Round!");
+        Player.printScores(this);
     }
 
     public final void setRemainingCards(List<Card> cards){
@@ -217,14 +213,9 @@ public abstract class Game implements Notifier{
 
     @Override
     public void notifyObserver(List<Card> cards){
-        for (Observer observer: observers){
-            observer.update(this, cards);
+        for (Observer observer: getObservers()){
+            observer.update(this);
         }
-    }
-
-    @Override
-    public void notifyObserver(Observer observer, List<Card> cards){
-        observer.update(this, cards);
     }
 
     // abstract
@@ -431,8 +422,10 @@ public abstract class Game implements Notifier{
         return observers;
     }
 
-    public void setObservers() {
+    public void setObservers(List<Player> players) {
         this.observers = new ArrayList<>();
-        observers.addAll(players);
+        for (Player player: players){
+            register(player);
+        }
     }
 }

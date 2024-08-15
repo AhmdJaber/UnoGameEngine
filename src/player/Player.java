@@ -64,7 +64,14 @@ public class Player implements Observer{
     }
 
     @Override
-    public void update(Game game, List<Card> cards) {
-        game.getCalculatePoints().calculate(this, cards);
+    public void update(Game game) {
+        game.getCalculatePoints().calculate(this, game);
+    }
+
+    public static void printScores(Game game){
+        System.out.println("The score of the players after this round: ");
+        for (Player player: game.getPlayers()){
+            System.out.println("[ " + player.getName() + ": " + player.getScore() + " ]");
+        }
     }
 }
