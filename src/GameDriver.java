@@ -3,7 +3,7 @@ import game.Game;
 
 public class GameDriver {
     public static void main(String[] args) {
-        Game game = BasicGame.getInstance();
-        game.start();
+        Game basicGame = new BasicGame();
+        basicGame.play();
     }
 }

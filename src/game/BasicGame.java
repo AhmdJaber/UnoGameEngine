@@ -2,9 +2,9 @@ package game;
 
 import rule.card.creation.NormalCardCreation;
 import rule.card.distribute.NormalDistribution;
-import rule.card.initial.SevenInitialCards;
+import rule.card.initial.PlayerInitialCards;
 import rule.color.NormalColorsInitialization;
-import rule.dealer.FirstPlayerDealer;
+import rule.dealer.PickDealer;
 import rule.direction.LeftInitialDirection;
 import rule.match.MatchTypeOrColor;
 import rule.player.NormalPlayerCreation;
@@ -13,15 +13,6 @@ import rule.shuffle.RandomShuffle;
 import rule.win.PositiveWin;
 
 public class BasicGame extends Game {
-    private static BasicGame basicGame = new BasicGame();
-
-    private BasicGame(){
-    }
-
-    public static BasicGame getInstance(){
-        return basicGame;
-    }
-
     @Override
     public void initPlayers() {
         this.setPlayerCreation(new NormalPlayerCreation(4));
@@ -29,37 +20,37 @@ public class BasicGame extends Game {
 
     @Override
     public void initDealer() {
-        this.setPickDealer(new FirstPlayerDealer());
+        this.setPickDealer(new PickDealer(0));
     }
 
     @Override
     public void initColors() {
-        this.setColorInitialization(new NormalColorsInitialization());
+        this.setColorInitialization(NormalColorsInitialization.getInstance());
     }
 
     @Override
     public void initCardCreation() {
-        this.setCardCreation(new NormalCardCreation());
+        this.setCardCreation(NormalCardCreation.getInstance());
     }
 
     @Override
     public void initShuffle() {
-        this.setInitializeShuffle(new RandomShuffle());
+        this.setInitializeShuffle(RandomShuffle.getInstance());
     }
 
     @Override
     public void initNumOfInItPlayerCards() {
-        this.setPlayerInitialCards(new SevenInitialCards());
+        this.setPlayerInitialCards(new PlayerInitialCards(7));
     }
 
     @Override
     public void initMatch(){
-        this.setMatch(new MatchTypeOrColor());
+        this.setMatch(MatchTypeOrColor.getInstance());
     }
 
     @Override
     public void initCalculatePoints() {
-        this.setCalculatePoints(new PositiveCalculation());
+        this.setCalculatePoints(PositiveCalculation.getInstance());
     }
 
     @Override
@@ -74,6 +65,6 @@ public class BasicGame extends Game {
 
     @Override
     public void initCardDistribution() {
-        this.setCardDistribution(new NormalDistribution());
+        this.setCardDistribution(NormalDistribution.getInstance());
     }
 }

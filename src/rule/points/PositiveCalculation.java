@@ -8,6 +8,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PositiveCalculation implements CalculatePoints{
+    private PositiveCalculation(){
+
+    }
+
+    private static class SingletonHolder{
+        private static final PositiveCalculation positiveCalculation = new PositiveCalculation();
+    }
+
+    public static PositiveCalculation getInstance(){
+        return SingletonHolder.positiveCalculation;
+    }
+
     @Override
     public void calculate(Player player, Game game) {
         if (player == null){

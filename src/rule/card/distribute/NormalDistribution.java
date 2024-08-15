@@ -2,10 +2,23 @@ package rule.card.distribute;
 
 import card.Card;
 import player.Player;
+import rule.card.creation.NormalCardCreation;
 
 import java.util.List;
 
 public class NormalDistribution implements CardDistribution {
+    private NormalDistribution(){
+
+    }
+
+    private static class SingletonHolder{
+        private static final NormalDistribution normalDistribution = new NormalDistribution();
+    }
+
+    public static NormalDistribution getInstance(){
+        return SingletonHolder.normalDistribution;
+    }
+
     @Override
     public void distribute(List<Card> cards, List<Player> players, Integer numOfInitCards){
         if (cards == null){

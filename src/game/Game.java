@@ -48,7 +48,7 @@ public abstract class Game implements Notifier{
     private CardDistribution cardDistribution;
     private List<Observer> observers;
 
-    public final void start(){
+    public final void play(){
         while (winner == null) {
             prepareGame();
             players = playerCreation.create();
@@ -62,7 +62,7 @@ public abstract class Game implements Notifier{
             direction = initialDirection.initialize();
             setRemainingCards(cards);
             setObservers(players);
-            gamePlay();
+            start();
             System.out.println("Round ends.");
             System.out.println("===========================================================");
         }
@@ -82,7 +82,7 @@ public abstract class Game implements Notifier{
         initCardDistribution();
     }
 
-    private void gamePlay(){
+    private void start(){
         Scanner sc = new Scanner(System.in);
         currentPlayer = dealer + direction;
         while (true){

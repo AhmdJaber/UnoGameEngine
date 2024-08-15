@@ -6,6 +6,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class NormalColorsInitialization implements ColorInitialization{
+    private NormalColorsInitialization(){
+    }
+
+    private static class SingletonHolder{
+        private static final NormalColorsInitialization normalColorsInitialization = new NormalColorsInitialization();
+    }
+
+    public static NormalColorsInitialization getInstance(){
+        return SingletonHolder.normalColorsInitialization;
+    }
+
     @Override
     public List<Color> initialize() {
         List<Color> colors = new ArrayList<>();

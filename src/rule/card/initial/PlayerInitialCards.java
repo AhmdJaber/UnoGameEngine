@@ -1,5 +1,13 @@
 package rule.card.initial;
 
-public interface PlayerInitialCards {
-    public Integer initialize();
+public class PlayerInitialCards {
+    private final int numOfInitCards;
+
+    public PlayerInitialCards(int numOfInitCards) {
+        this.numOfInitCards = numOfInitCards;
+    }
+
+    public Integer initialize(){
+        return numOfInitCards;
+    }
 }

@@ -10,6 +10,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class NormalCardCreation implements CardCreation {
+    private NormalCardCreation(){
+
+    }
+
+    private static class SingletonHolder{
+        private static final NormalCardCreation normalCardCreation = new NormalCardCreation();
+    }
+
+    public static NormalCardCreation getInstance(){
+        return SingletonHolder.normalCardCreation;
+    }
+
     @Override
     public List<Card> create(List<Color> colors) {
         if (colors == null){

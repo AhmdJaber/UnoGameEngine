@@ -6,6 +6,18 @@ import java.util.Collections;
 import java.util.List;
 
 public class RandomShuffle implements InitializeShuffle {
+    private RandomShuffle(){
+
+    }
+
+    private static class SingletonHolder{
+        private static final RandomShuffle randomShuffle = new RandomShuffle();
+    }
+
+    public static RandomShuffle getInstance(){
+        return SingletonHolder.randomShuffle;
+    }
+
     @Override
     public void shuffle(List<Card> cards) {
         if (cards == null){
