@@ -1,7 +1,7 @@
 package card.cards.action;
 
 import card.ActionCard;
-import card.action.ReverseDirection;
+import utility.action.ReverseDirection;
 import card.enums.Color;
 import card.enums.Type;
 import game.Game;

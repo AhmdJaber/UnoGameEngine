@@ -9,17 +9,17 @@ import card.cards.number.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NormalCardCreation implements CardCreation {
-    private NormalCardCreation(){
+public class StandardCardCreation implements CardCreation {
+    private StandardCardCreation(){
 
     }
 
     private static class SingletonHolder{
-        private static final NormalCardCreation normalCardCreation = new NormalCardCreation();
+        private static final StandardCardCreation standardCardCreation = new StandardCardCreation();
     }
 
-    public static NormalCardCreation getInstance(){
-        return SingletonHolder.normalCardCreation;
+    public static StandardCardCreation getInstance(){
+        return SingletonHolder.standardCardCreation;
     }
 
     @Override

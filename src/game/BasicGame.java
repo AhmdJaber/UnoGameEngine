@@ -1,13 +1,13 @@
 package game;
 
-import rule.card.creation.NormalCardCreation;
-import rule.card.distribute.NormalDistribution;
+import rule.card.creation.StandardCardCreation;
+import rule.card.distribute.StandardDistribution;
 import rule.card.initial.PlayerInitialCards;
-import rule.color.NormalColorsInitialization;
+import rule.color.StandardColorsInitialization;
 import rule.dealer.PickDealer;
-import rule.direction.LeftInitialDirection;
+import rule.direction.LeftDirection;
 import rule.match.MatchTypeOrColor;
-import rule.player.NormalPlayerCreation;
+import rule.player.StandardPlayerCreation;
 import rule.points.PositiveCalculation;
 import rule.shuffle.RandomShuffle;
 import rule.win.PositiveWin;
@@ -15,7 +15,7 @@ import rule.win.PositiveWin;
 public class BasicGame extends Game {
     @Override
     public void initPlayers() {
-        this.setPlayerCreation(new NormalPlayerCreation(4));
+        this.setPlayerCreation(new StandardPlayerCreation(4));
     }
 
     @Override
@@ -25,12 +25,12 @@ public class BasicGame extends Game {
 
     @Override
     public void initColors() {
-        this.setColorInitialization(NormalColorsInitialization.getInstance());
+        this.setColorInitialization(StandardColorsInitialization.getInstance());
     }
 
     @Override
     public void initCardCreation() {
-        this.setCardCreation(NormalCardCreation.getInstance());
+        this.setCardCreation(StandardCardCreation.getInstance());
     }
 
     @Override
@@ -60,11 +60,11 @@ public class BasicGame extends Game {
 
     @Override
     public void initInitDirection() {
-        this.setInitialDirection(new LeftInitialDirection());
+        this.setInitialDirection(new LeftDirection());
     }
 
     @Override
     public void initCardDistribution() {
-        this.setCardDistribution(NormalDistribution.getInstance());
+        this.setCardDistribution(StandardDistribution.getInstance());
     }
 }

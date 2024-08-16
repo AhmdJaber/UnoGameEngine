@@ -5,16 +5,16 @@ import card.enums.Color;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NormalColorsInitialization implements ColorInitialization{
-    private NormalColorsInitialization(){
+public class StandardColorsInitialization implements ColorInitialization{
+    private StandardColorsInitialization(){
     }
 
     private static class SingletonHolder{
-        private static final NormalColorsInitialization normalColorsInitialization = new NormalColorsInitialization();
+        private static final StandardColorsInitialization standardColorsInitialization = new StandardColorsInitialization();
     }
 
-    public static NormalColorsInitialization getInstance(){
-        return SingletonHolder.normalColorsInitialization;
+    public static StandardColorsInitialization getInstance(){
+        return SingletonHolder.standardColorsInitialization;
     }
 
     @Override

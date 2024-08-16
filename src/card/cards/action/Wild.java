@@ -1,7 +1,7 @@
 package card.cards.action;
 
 import card.ActionCard;
-import card.action.ChangeColor;
+import utility.action.ChangeColor;
 import card.enums.Color;
 import card.enums.Type;
 import game.Game;

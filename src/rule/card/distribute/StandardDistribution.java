@@ -2,21 +2,20 @@ package rule.card.distribute;
 
 import card.Card;
 import player.Player;
-import rule.card.creation.NormalCardCreation;
 
 import java.util.List;
 
-public class NormalDistribution implements CardDistribution {
-    private NormalDistribution(){
+public class StandardDistribution implements CardDistribution {
+    private StandardDistribution(){
 
     }
 
     private static class SingletonHolder{
-        private static final NormalDistribution normalDistribution = new NormalDistribution();
+        private static final StandardDistribution standardDistribution = new StandardDistribution();
     }
 
-    public static NormalDistribution getInstance(){
-        return SingletonHolder.normalDistribution;
+    public static StandardDistribution getInstance(){
+        return SingletonHolder.standardDistribution;
     }
 
     @Override

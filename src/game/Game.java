@@ -2,7 +2,7 @@ package game;
 
 import card.ActionCard;
 import card.Card;
-import card.action.DrawCards;
+import utility.action.DrawCards;
 import card.enums.Color;
 import card.enums.Type;
 import player.Observer;
@@ -84,6 +84,7 @@ public abstract class Game implements Notifier{
 
     private void start(){
         Scanner sc = new Scanner(System.in);
+
         currentPlayer = dealer + direction;
         while (true){
             currentPlayer = (currentPlayer + players.size()) % players.size();
@@ -186,18 +187,17 @@ public abstract class Game implements Notifier{
 
     public final boolean checkUseCard(){
         System.out.println("Do you want to use the drawn card? [Y/N]");
-        try (Scanner sc = new Scanner(System.in)){
-            while (true){
-                String input = sc.next();
-                if (input.equalsIgnoreCase("yes") || input.equalsIgnoreCase("y")){
-                    return true;
-                }
-                else if (input.equalsIgnoreCase("no") || input.equalsIgnoreCase("n")){
-                    return false;
-                }
-                else {
-                    System.out.println("Enter Y/Yes or N/NO");
-                }
+        Scanner sc = new Scanner(System.in);
+        while (true){
+            String input = sc.next();
+            if (input.equalsIgnoreCase("yes") || input.equalsIgnoreCase("y")){
+                return true;
+            }
+            else if (input.equalsIgnoreCase("no") || input.equalsIgnoreCase("n")){
+                return false;
+            }
+            else {
+                System.out.println("Enter Y/Yes or N/NO");
             }
         }
     }
