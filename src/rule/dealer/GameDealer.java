@@ -1,9 +1,9 @@
 package rule.dealer;
 
-public class PickDealer {
+public class GameDealer {
     private final int dealer;
 
-    public PickDealer(int dealer) {
+    public GameDealer(int dealer) {
         this.dealer = dealer;
     }
 

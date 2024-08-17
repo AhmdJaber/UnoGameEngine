@@ -13,6 +13,9 @@ public class StandardPlayerCreation extends NumberedPlayerCreation{
 
     @Override
     public List<Player> create() {
+        if (getNumOfPlayers() < 2){
+            throw new IllegalArgumentException("Number of players must be greater than 1");
+        }
         List<Player> players = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
         for (int i = 0; i < this.getNumOfPlayers(); i++){

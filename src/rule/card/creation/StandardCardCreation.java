@@ -33,21 +33,21 @@ public class StandardCardCreation implements CardCreation {
             if (color == Color.NONE){
                 continue;
             }
-            validCards.add(new Zero(Type.ZERO, color, 0));
-            validCards.add(new One(Type.ONE, color, 1));
-            validCards.add(new Two(Type.TWO, color, 2));
-            validCards.add(new Three(Type.THREE, color, 3));
-            validCards.add(new Four(Type.FOUR, color, 4));
-            validCards.add(new Five(Type.FIVE, color, 5));
-            validCards.add(new Six(Type.SIX, color, 6));
-            validCards.add(new Seven(Type.SEVEN, color, 7));
-            validCards.add(new Eight(Type.EIGHT, color, 8));
-            validCards.add(new Nine(Type.NINE, color, 9));
-            validCards.add(new Pass(Type.PASS, color, 20));
-            validCards.add(new Reverse(Type.REVERSE, color, 20));
-            validCards.add(new DrawTwo(Type.DRAW_TWO, color, 20));
-            validCards.add(new Wild(Type.WILD, Color.NONE, 50));
-            validCards.add(new WildDrawFour(Type.WILD_DRAW_FOUR, Color.NONE, 50));
+            validCards.add(CardFactoryMethod.createCard("zero", color));
+            validCards.add(CardFactoryMethod.createCard("one", color));
+            validCards.add(CardFactoryMethod.createCard("two", color));
+            validCards.add(CardFactoryMethod.createCard("three", color));
+            validCards.add(CardFactoryMethod.createCard("four", color));
+            validCards.add(CardFactoryMethod.createCard("five", color));
+            validCards.add(CardFactoryMethod.createCard("six", color));
+            validCards.add(CardFactoryMethod.createCard("seven", color));
+            validCards.add(CardFactoryMethod.createCard("eight", color));
+            validCards.add(CardFactoryMethod.createCard("nine", color));
+            validCards.add(CardFactoryMethod.createCard("pass", color));
+            validCards.add(CardFactoryMethod.createCard("reverse", color));
+            validCards.add(CardFactoryMethod.createCard("draw2", color));
+            validCards.add(CardFactoryMethod.createCard("wild", color));
+            validCards.add(CardFactoryMethod.createCard("wildDraw4", color));
         }
 
         for (Card card : validCards){

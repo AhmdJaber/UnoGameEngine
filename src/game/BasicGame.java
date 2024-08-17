@@ -4,7 +4,7 @@ import rule.card.creation.StandardCardCreation;
 import rule.card.distribute.StandardDistribution;
 import rule.card.initial.PlayerInitialCards;
 import rule.color.StandardColorsInitialization;
-import rule.dealer.PickDealer;
+import rule.dealer.GameDealer;
 import rule.direction.LeftDirection;
 import rule.match.MatchTypeOrColor;
 import rule.player.StandardPlayerCreation;
@@ -20,7 +20,7 @@ public class BasicGame extends Game {
 
     @Override
     public void initDealer() {
-        this.setPickDealer(new PickDealer(0));
+        this.setGameDealer(new GameDealer(0));
     }
 
     @Override

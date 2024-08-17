@@ -11,7 +11,7 @@ import rule.card.creation.CardCreation;
 import rule.card.distribute.CardDistribution;
 import rule.card.initial.PlayerInitialCards;
 import rule.color.ColorInitialization;
-import rule.dealer.PickDealer;
+import rule.dealer.GameDealer;
 import rule.direction.InitialDirection;
 import rule.match.Match;
 import rule.player.PlayerCreation;
@@ -30,18 +30,16 @@ public abstract class Game implements Notifier{
     private Player winner;
     private List<Card> cards;
     private List<Color> colors;
-    private Color currentColor;
     private List<Card> pile;
     private List<Card> discard;
     private Integer direction;
-    private Integer numOfInitPlayerCards;
     private Match match;
     private Win win;
     private InitializeShuffle initializeShuffle;
     private CardCreation cardCreation;
     private ColorInitialization colorInitialization;
     private PlayerCreation playerCreation;
-    private PickDealer pickDealer;
+    private GameDealer gameDealer;
     private PlayerInitialCards playerInitialCards;
     private InitialDirection initialDirection;
     private CalculatePoints calculatePoints;
@@ -53,11 +51,11 @@ public abstract class Game implements Notifier{
         players = playerCreation.create();
         colors = colorInitialization.initialize();
         while (winner == null) {
-            dealer = pickDealer.pick();
+            dealer = gameDealer.pick();
             currentPlayer = dealer;
             cards = cardCreation.create(colors);
             initializeShuffle.shuffle(cards);
-            numOfInitPlayerCards = playerInitialCards.initialize();
+            Integer numOfInitPlayerCards = playerInitialCards.initialize();
             cardDistribution.distribute(cards, players, numOfInitPlayerCards);
             direction = initialDirection.initialize();
             setRemainingCards(cards);
@@ -219,7 +217,6 @@ public abstract class Game implements Notifier{
         }
     }
 
-    // abstract
     public abstract void initPlayers();
 
     public abstract void initDealer();
@@ -242,21 +239,9 @@ public abstract class Game implements Notifier{
 
     public abstract void initCardDistribution();
 
-    // getters / setters
+
     public List<Player> getPlayers() {
         return players;
-    }
-
-    public void setPlayers(List<Player> players) {
-        this.players = players;
-    }
-
-    public Integer getDealer() {
-        return dealer;
-    }
-
-    public void setDealer(Integer dealer) {
-        this.dealer = dealer;
     }
 
     public Integer getCurrentPlayer() {
@@ -271,10 +256,6 @@ public abstract class Game implements Notifier{
         return winner;
     }
 
-    public void setWinner(Player winner) {
-        this.winner = winner;
-    }
-
     public List<Card> getCards() {
         return cards;
     }
@@ -287,24 +268,8 @@ public abstract class Game implements Notifier{
         return colors;
     }
 
-    public void setColors(List<Color> colors) {
-        this.colors = colors;
-    }
-
-    public Color getCurrentColor() {
-        return currentColor;
-    }
-
-    public void setCurrentColor(Color currentColor) {
-        this.currentColor = currentColor;
-    }
-
     public List<Card> getPile() {
         return pile;
-    }
-
-    public void setPile(List<Card> pile) {
-        this.pile = pile;
     }
 
     public List<Card> getDiscard() {
@@ -323,18 +288,6 @@ public abstract class Game implements Notifier{
         this.direction = direction;
     }
 
-    public Integer getNumOfInitPlayerCards() {
-        return numOfInitPlayerCards;
-    }
-
-    public void setNumOfInitPlayerCards(Integer numOfInitPlayerCards) {
-        this.numOfInitPlayerCards = numOfInitPlayerCards;
-    }
-
-    public Match getMatch() {
-        return match;
-    }
-
     public void setMatch(Match match) {
         this.match = match;
     }
@@ -347,56 +300,28 @@ public abstract class Game implements Notifier{
         this.win = win;
     }
 
-    public InitializeShuffle getInitializeShuffle() {
-        return initializeShuffle;
-    }
-
     public void setInitializeShuffle(InitializeShuffle initializeShuffle) {
         this.initializeShuffle = initializeShuffle;
-    }
-
-    public CardCreation getCardCreation() {
-        return cardCreation;
     }
 
     public void setCardCreation(CardCreation cardCreation) {
         this.cardCreation = cardCreation;
     }
 
-    public ColorInitialization getColorInitialization() {
-        return colorInitialization;
-    }
-
     public void setColorInitialization(ColorInitialization colorInitialization) {
         this.colorInitialization = colorInitialization;
-    }
-
-    public PlayerCreation getPlayerCreation() {
-        return playerCreation;
     }
 
     public void setPlayerCreation(PlayerCreation playerCreation) {
         this.playerCreation = playerCreation;
     }
 
-    public PickDealer getPickDealer() {
-        return pickDealer;
-    }
-
-    public void setPickDealer(PickDealer pickDealer) {
-        this.pickDealer = pickDealer;
-    }
-
-    public PlayerInitialCards getPlayerInitialCards() {
-        return playerInitialCards;
+    public void setGameDealer(GameDealer gameDealer) {
+        this.gameDealer = gameDealer;
     }
 
     public void setPlayerInitialCards(PlayerInitialCards playerInitialCards) {
         this.playerInitialCards = playerInitialCards;
-    }
-
-    public InitialDirection getInitialDirection() {
-        return initialDirection;
     }
 
     public void setInitialDirection(InitialDirection initialDirection) {
@@ -409,10 +334,6 @@ public abstract class Game implements Notifier{
 
     public void setCalculatePoints(CalculatePoints calculatePoints) {
         this.calculatePoints = calculatePoints;
-    }
-
-    public CardDistribution getCardDistribution() {
-        return cardDistribution;
     }
 
     public void setCardDistribution(CardDistribution cardDistribution) {
