@@ -1,9 +1,9 @@
-import game.BasicGame;
+import game.AttackGame;
 import game.Game;
 
 public class GameDriver {
     public static void main(String[] args) {
-        Game basicGame = new BasicGame();
-        basicGame.play();
+        Game attackGame = new AttackGame();
+        attackGame.play();
     }
 }

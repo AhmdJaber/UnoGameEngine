@@ -49,12 +49,12 @@ public abstract class Game implements Notifier{
     private List<Observer> observers;
 
     public final void play(){
+        prepareGame();
+        players = playerCreation.create();
+        colors = colorInitialization.initialize();
         while (winner == null) {
-            prepareGame();
-            players = playerCreation.create();
             dealer = pickDealer.pick();
             currentPlayer = dealer;
-            colors = colorInitialization.initialize();
             cards = cardCreation.create(colors);
             initializeShuffle.shuffle(cards);
             numOfInitPlayerCards = playerInitialCards.initialize();
@@ -145,7 +145,7 @@ public abstract class Game implements Notifier{
             }
 
             if (player.getCards().isEmpty()){
-                notifyObserver(player.getCards());
+                notifyObserver();
 
                 if (getWin().win(player)){
                     winner = player;
@@ -154,9 +154,9 @@ public abstract class Game implements Notifier{
             }
             currentPlayer += direction;
         }
-        System.out.println("The player: " + winner + " Wins the Round!");
+
+        System.out.println("The player: " + this.getPlayers().get(this.getCurrentPlayer()) + " Wins the Round!");
         Player.printScores(this);
-        sc.close();
     }
 
     public final void setRemainingCards(List<Card> cards){
@@ -213,7 +213,7 @@ public abstract class Game implements Notifier{
     }
 
     @Override
-    public void notifyObserver(List<Card> cards){
+    public void notifyObserver(){
         for (Observer observer: getObservers()){
             observer.update(this);
         }

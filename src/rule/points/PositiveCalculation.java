@@ -25,7 +25,12 @@ public class PositiveCalculation implements CalculatePoints{
         if (player == null){
             throw new IllegalArgumentException("player is null");
         }
-        if (player != game.getWinner()){
+
+        if (game == null){
+            throw new IllegalArgumentException("game is null");
+        }
+
+        if (!player.getCards().isEmpty()){
             return;
         }
 
@@ -38,6 +43,6 @@ public class PositiveCalculation implements CalculatePoints{
         for (Card card : allPlayersCards) {
             count += card.getPoints();
         }
-       player.setScore(count);
+        player.setScore(count);
     }
 }

@@ -36,7 +36,6 @@ public class Colors {
                 System.out.println("Please enter a valid color");
             }
         }
-        sc.close();
         return color;
     }
 }
