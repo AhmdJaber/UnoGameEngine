@@ -3,7 +3,7 @@ package utility.action;
 import card.Card;
 import game.Game;
 import player.Player;
-import utility.DiscardCards;
+import utility.DiscardUtil;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ public class DrawCards {
         List<Card> pile = game.getPile();
         for (int i = 0; i < numOfCards; i++){
             if (pile.isEmpty()){
-                DiscardCards.discardToPile(game);
+                DiscardUtil.discardToPile(game);
             }
             player.getCards().add(pile.remove(pile.size() - 1));
         }

@@ -5,8 +5,8 @@ import card.enums.Color;
 import java.util.List;
 import java.util.Scanner;
 
-public class Colors {
-    private Colors(){
+public class ColorUtil {
+    private ColorUtil(){
         throw new AssertionError("Utility class should not be instantiated");
     }
 

@@ -7,7 +7,6 @@ import java.util.List;
 
 public class RandomShuffle implements InitializeShuffle {
     private RandomShuffle(){
-
     }
 
     private static class SingletonHolder{

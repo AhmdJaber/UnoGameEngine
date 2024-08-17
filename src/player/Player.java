@@ -7,16 +7,46 @@ import java.util.List;
 import java.util.Objects;
 
 public class Player implements Observer{
-    private String name;
-    private Integer age;
+    private final String name;
+    private final Integer age;
     private Integer score;
     private List<Card> cards;
 
-    public Player(String name, Integer age, Integer score, List<Card> cards) {
-        this.name = name;
-        this.age = age;
-        this.score = score;
-        this.cards = cards;
+    private Player(PlayerBuilder playerBuilder){
+        this.name = playerBuilder.name;
+        this.age = playerBuilder.age;
+        this.score = playerBuilder.score;
+        this.cards = playerBuilder.cards;
+    }
+
+    public static class PlayerBuilder {
+        private final String name;
+        private Integer age;
+        private Integer score;
+        private List<Card> cards;
+
+        public PlayerBuilder(String name){
+            this.name = name;
+        }
+
+        public PlayerBuilder age(Integer age){
+            this.age = age;
+            return this;
+        }
+
+        public PlayerBuilder score(Integer score){
+            this.score = score;
+            return this;
+        }
+
+        public PlayerBuilder cards(List<Card> cards){
+            this.cards = cards;
+            return this;
+        }
+
+        public Player build(){
+            return new Player(this);
+        }
     }
 
     public List<Card> getCards() {
@@ -27,24 +57,8 @@ public class Player implements Observer{
         this.cards = cards;
     }
 
-    public void addCard(Card card) {
-        this.cards.add(card);
-    }
-
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
     }
 
     public Integer getScore() {

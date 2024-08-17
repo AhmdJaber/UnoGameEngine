@@ -7,7 +7,7 @@ import java.util.Objects;
 
 public abstract class Card {
     private final Type type;
-    private Color color; // How to make it final?
+    private Color color;
     private final Integer points;
 
     public Card(Type type, Color color, Integer points) {

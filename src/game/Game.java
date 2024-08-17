@@ -2,7 +2,6 @@ package game;
 
 import card.ActionCard;
 import card.Card;
-import utility.action.DrawCards;
 import card.enums.Color;
 import card.enums.Type;
 import player.Observer;
@@ -18,6 +17,7 @@ import rule.player.PlayerCreation;
 import rule.points.CalculatePoints;
 import rule.shuffle.InitializeShuffle;
 import rule.win.Win;
+import utility.action.DrawCards;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -143,7 +143,7 @@ public abstract class Game implements Notifier{
             }
 
             if (player.getCards().isEmpty()){
-                notifyObserver();
+                notifyObservers();
 
                 if (getWin().win(player)){
                     winner = player;
@@ -173,7 +173,7 @@ public abstract class Game implements Notifier{
         cards.clear();
     }
 
-    public final boolean checkCardsMatch(Player player, Card card){
+    private boolean checkCardsMatch(Player player, Card card){
         for (Card currentCard: player.getCards()){
             if (match.match(currentCard, card) || currentCard.getType() == Type.WILD || currentCard.getType() == Type.WILD_DRAW_FOUR){
                 return true;
@@ -211,7 +211,7 @@ public abstract class Game implements Notifier{
     }
 
     @Override
-    public void notifyObserver(){
+    public void notifyObservers(){
         for (Observer observer: getObservers()){
             observer.update(this);
         }

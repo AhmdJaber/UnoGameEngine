@@ -5,8 +5,8 @@ import game.Game;
 import rule.shuffle.InitializeShuffle;
 import rule.shuffle.RandomShuffle;
 
-public class DiscardCards {
-    private DiscardCards(){
+public class DiscardUtil {
+    private DiscardUtil(){
         throw new AssertionError("Utility class should not be instantiated");
     }
 

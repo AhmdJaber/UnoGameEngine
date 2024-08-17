@@ -27,7 +27,12 @@ public class StandardPlayerCreation extends NumberedPlayerCreation{
                 System.out.println("Enter a number greater than 0");
                 age = sc.nextInt();
             }
-            players.add(new Player(name, age, 0, new ArrayList<>()));
+            Player player = new Player.PlayerBuilder(name)
+                    .age(age)
+                    .score(0)
+                    .cards(new ArrayList<>())
+                    .build();
+            players.add(player);
         }
         return players;
     }
