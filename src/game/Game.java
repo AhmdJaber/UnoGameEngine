@@ -2,6 +2,7 @@ package game;
 
 import card.ActionCard;
 import card.Card;
+import card.cards.action.Continue;
 import card.enums.Color;
 import card.enums.Type;
 import player.Observer;
@@ -176,7 +177,7 @@ public abstract class Game implements Notifier{
 
     private boolean checkCardsMatch(Player player, Card card){
         for (Card currentCard: player.getCards()){
-            if (match.match(currentCard, card) || currentCard.getType() == Type.WILD || currentCard.getType() == Type.WILD_DRAW_FOUR){
+            if (match.match(currentCard, card)){
                 return true;
             }
         }

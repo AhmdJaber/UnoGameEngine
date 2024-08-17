@@ -12,6 +12,6 @@ public class Continue extends ActionCard {
 
     @Override
     public void action(Game game) {
-        // implement the action
+        game.setCurrentPlayer(game.getCurrentPlayer() - game.getDirection());
     }
 }

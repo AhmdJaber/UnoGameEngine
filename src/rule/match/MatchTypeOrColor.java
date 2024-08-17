@@ -1,6 +1,7 @@
 package rule.match;
 
 import card.Card;
+import card.enums.Color;
 
 public class MatchTypeOrColor implements Match{
     private MatchTypeOrColor(){
@@ -24,6 +25,7 @@ public class MatchTypeOrColor implements Match{
             throw new IllegalArgumentException("card 2 is null when trying to match");
         }
 
-        return card1.getType() == card2.getType() || card1.getColor() == card2.getColor();
+        return card1.getType() == card2.getType() || card1.getColor() == card2.getColor()
+                || card1.getColor() == Color.NONE || card2.getColor() == Color.NONE;
     }
 }
