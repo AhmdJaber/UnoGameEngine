@@ -8,6 +8,10 @@ import utility.DiscardUtil;
 import java.util.List;
 
 public class DrawCards {
+    private DrawCards(){
+        throw new AssertionError("Utility class should not be instantiated");
+    }
+
     public static void draw(Game game, Player player, Integer numOfCards){
         if (game == null){
             throw new IllegalArgumentException("Game is null");
