@@ -84,7 +84,7 @@ public class Player implements Observer{
     @Override
     public String toString() {
         return name + "{" +
-                ", age=" + age +
+                " age=" + age +
                 ", score=" + score +
                 ", cards=" + cards +
                 '}';

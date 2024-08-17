@@ -155,6 +155,7 @@ public abstract class Game implements Notifier{
 
         System.out.println("The player: " + this.getPlayers().get(this.getCurrentPlayer()) + " Wins the Round!");
         Player.printScores(this);
+        sc.close();
     }
 
     public final void setRemainingCards(List<Card> cards){
@@ -179,7 +180,6 @@ public abstract class Game implements Notifier{
                 return true;
             }
         }
-
         return false;
     }
 
@@ -219,8 +219,6 @@ public abstract class Game implements Notifier{
 
     public abstract void initPlayers();
 
-    public abstract void initDealer();
-
     public abstract void initColors();
 
     public abstract void initCardCreation();
@@ -239,6 +237,7 @@ public abstract class Game implements Notifier{
 
     public abstract void initCardDistribution();
 
+    public abstract void initDealer();
 
     public List<Player> getPlayers() {
         return players;

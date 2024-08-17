@@ -38,6 +38,8 @@ public class CardFactoryMethod {
             return new Wild(Type.WILD, color, 50);
         else if (cardType.equalsIgnoreCase("wildDraw4"))
             return new WildDrawFour(Type.WILD_DRAW_FOUR, color, 50);
+        else if (cardType.equalsIgnoreCase("continue"))
+            return new Continue(Type.Continue, color, 50);
         return null;
     }
 }

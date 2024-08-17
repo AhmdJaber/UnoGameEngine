@@ -15,5 +15,6 @@ public enum Type {
     REVERSE,
     DRAW_TWO,
     WILD,
-    WILD_DRAW_FOUR
+    WILD_DRAW_FOUR,
+    Continue
 }
