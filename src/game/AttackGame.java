@@ -44,7 +44,7 @@ public class AttackGame extends Game{
     }
 
     @Override
-    public void initMatch() {
+    public void initMatching() {
         this.setMatch(MatchTypeOrColor.getInstance());
     }
 

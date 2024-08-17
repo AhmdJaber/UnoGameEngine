@@ -19,11 +19,6 @@ public class BasicGame extends Game {
     }
 
     @Override
-    public void initDealer() {
-        this.setGameDealer(new GameDealer(0));
-    }
-
-    @Override
     public void initColors() {
         this.setColorInitialization(StandardColorsInitialization.getInstance());
     }
@@ -44,7 +39,7 @@ public class BasicGame extends Game {
     }
 
     @Override
-    public void initMatch(){
+    public void initMatching(){
         this.setMatch(MatchTypeOrColor.getInstance());
     }
 
@@ -61,6 +56,11 @@ public class BasicGame extends Game {
     @Override
     public void initInitDirection() {
         this.setInitialDirection(new LeftDirection());
+    }
+
+    @Override
+    public void initDealer() {
+        this.setGameDealer(new GameDealer(0));
     }
 
     @Override

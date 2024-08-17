@@ -2,7 +2,6 @@ package game;
 
 import card.ActionCard;
 import card.Card;
-import card.cards.action.Continue;
 import card.enums.Color;
 import card.enums.Type;
 import player.Observer;
@@ -77,7 +76,7 @@ public abstract class Game implements Notifier{
         initInitDirection();
         initCalculatePoints();
         initWin();
-        initMatch();
+        initMatching();
         initCardDistribution();
     }
 
@@ -156,7 +155,8 @@ public abstract class Game implements Notifier{
 
         System.out.println("The player: " + this.getPlayers().get(this.getCurrentPlayer()) + " Wins the Round!");
         Player.printScores(this);
-        sc.close();
+        if (winner != null)
+            sc.close();
     }
 
     public final void setRemainingCards(List<Card> cards){
@@ -228,7 +228,7 @@ public abstract class Game implements Notifier{
 
     public abstract void initNumOfInItPlayerCards();
 
-    public abstract void initMatch();
+    public abstract void initMatching();
 
     public abstract void initCalculatePoints();
 

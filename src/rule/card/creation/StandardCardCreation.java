@@ -46,8 +46,8 @@ public class StandardCardCreation implements CardCreation {
             validCards.add(CardFactoryMethod.createCard("pass", color));
             validCards.add(CardFactoryMethod.createCard("reverse", color));
             validCards.add(CardFactoryMethod.createCard("draw2", color));
-            validCards.add(CardFactoryMethod.createCard("wild", color));
-            validCards.add(CardFactoryMethod.createCard("wildDraw4", color));
+            validCards.add(CardFactoryMethod.createCard("wild", Color.NONE));
+            validCards.add(CardFactoryMethod.createCard("wildDraw4", Color.NONE));
         }
 
         for (Card card : validCards){
